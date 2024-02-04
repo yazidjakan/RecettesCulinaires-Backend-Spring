@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.IOException;
 
 @Component
+@ComponentScan
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @WebFilter("/*")
 public class CorsConfig implements Filter {
@@ -51,9 +53,7 @@ public class CorsConfig implements Filter {
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,DELETE,PUT,PATCH");
             response.setHeader("Access-Control-Max-Age", "3600");
-            response.setHeader("Access-Control-Allow-Headers", "Access-Control-Expose-Headers" + "Authorization, content-type," +
-                    "USERID" + "ROLE" +
-                    "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with,responseType,observe");
+            response.setHeader("Access-Control-Allow-Headers", "Access-Control-Expose-Headers, Authorization, content-type, USERID, ROLE, access-control-request-headers, access-control-request-method, accept, origin, authorization, x-requested-with, responseType, observe");
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }

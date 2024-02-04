@@ -37,9 +37,9 @@ public class RecettesCulinairesApplication implements CommandLineRunner {
 		}
 
 		Utilisateur user = new Utilisateur();
-		user.setNom("hamza");
+		user.setNom("yazid");
 		user.setAge(25);
-		user.setEmail("hamzajaa@gmail.com");
+		user.setEmail("yazidjakan0@gmail.com");
 		user.setPassword(passwordEncoder.encode("123"));
 
 		if (userDao.findByEmail(user.getEmail()) == null) {

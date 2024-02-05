@@ -1,4 +1,4 @@
-package com.recettes.miniprojet.recettesculinaires.dto;
+package com.recettes.miniprojet.recettesculinaires.security.dto;
 
 import lombok.Data;
 

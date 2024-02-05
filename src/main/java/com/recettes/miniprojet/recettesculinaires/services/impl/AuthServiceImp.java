@@ -1,7 +1,7 @@
 package com.recettes.miniprojet.recettesculinaires.services.impl;
 
-import com.recettes.miniprojet.recettesculinaires.dto.LoginDto;
-import com.recettes.miniprojet.recettesculinaires.dto.RegisterDto;
+import com.recettes.miniprojet.recettesculinaires.security.dto.LoginDto;
+import com.recettes.miniprojet.recettesculinaires.security.dto.RegisterDto;
 import com.recettes.miniprojet.recettesculinaires.repositories.RoleDao;
 import com.recettes.miniprojet.recettesculinaires.repositories.UtilisateurDao;
 import com.recettes.miniprojet.recettesculinaires.security.bean.Role;

@@ -4,9 +4,9 @@ package com.recettes.miniprojet.recettesculinaires.security.controller;
 
 
 
-import com.recettes.miniprojet.recettesculinaires.dto.JWTAuthResponse;
-import com.recettes.miniprojet.recettesculinaires.dto.LoginDto;
-import com.recettes.miniprojet.recettesculinaires.dto.RegisterDto;
+import com.recettes.miniprojet.recettesculinaires.security.dto.JWTAuthResponse;
+import com.recettes.miniprojet.recettesculinaires.security.dto.LoginDto;
+import com.recettes.miniprojet.recettesculinaires.security.dto.RegisterDto;
 import com.recettes.miniprojet.recettesculinaires.services.facade.AuthService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;

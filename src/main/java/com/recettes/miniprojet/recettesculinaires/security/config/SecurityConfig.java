@@ -57,7 +57,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers("/api/v1/auth/login").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/v1/auth/login").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/v1/auth/register").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/**").permitAll()
@@ -71,8 +72,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class); // do authenticationFilter before all filter in UsernamePasswordAuthenticationFilter
-
+        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

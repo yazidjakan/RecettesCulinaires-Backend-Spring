@@ -21,15 +21,16 @@ public class RecetteServiceImpl implements RecetteService {
     private RecetteDao recetteDao;
     @Autowired
     private RecetteTransformer recetteTransformer;
+
     @Override
     public List<RecetteDto> findAll() {
-        List<Recette> recettes=recetteDao.findAll();
+        List<Recette> recettes = recetteDao.findAll();
         return recetteTransformer.toDto(recettes);
     }
 
     @Override
     public RecetteDto findById(String id) {
-        Recette foundeduser=recetteDao.findById(id).orElseThrow();
+        Recette foundeduser = recetteDao.findById(id).orElseThrow(() -> new IllegalArgumentException("Recette not found with id: " + id));
         return recetteTransformer.toDto(foundeduser);
     }
 
@@ -42,17 +43,17 @@ public class RecetteServiceImpl implements RecetteService {
 
     @Override
     public Optional<RecetteDto> save(RecetteDto D) {
-        Recette entity=recetteTransformer.toEntity(D);
-        log.info("La recette est ajouté :"+entity.getTitre());
+        Recette entity = recetteTransformer.toEntity(D);
+        log.info("La recette est ajouté :" + entity.getTitre());
         return Optional.of(recetteTransformer.toDto(recetteDao.save(entity)));
     }
 
     @Override
     public Optional<List<RecetteDto>> save(List<RecetteDto> D) {
-        List<RecetteDto> dtos=new ArrayList<>();
-        for(RecetteDto dto: dtos){
-            Recette entity=recetteTransformer.toEntity(dto);
-            Recette saved=recetteDao.save(entity);
+        List<RecetteDto> dtos = new ArrayList<>();
+        for (RecetteDto dto : dtos) {
+            Recette entity = recetteTransformer.toEntity(dto);
+            Recette saved = recetteDao.save(entity);
             dtos.add(recetteTransformer.toDto(saved));
         }
         return Optional.of(dtos);
@@ -60,15 +61,15 @@ public class RecetteServiceImpl implements RecetteService {
 
     @Override
     public Optional<RecetteDto> update(RecetteDto D) {
-        Recette recette=recetteTransformer.toEntity(D);
-        Recette recetteUpdated=recetteDao.save(recette);
+        Recette recette = recetteTransformer.toEntity(D);
+        Recette recetteUpdated = recetteDao.save(recette);
         return Optional.of(recetteTransformer.toDto(recetteUpdated));
     }
 
     @Override
     public Optional<RecetteDto> updateById(String id, RecetteDto recetteDto) {
-        recetteDto=findById(id);
-        Recette recetteFounded=recetteTransformer.toEntity(recetteDto);
+        findById(id);
+        Recette recetteFounded = recetteTransformer.toEntity(recetteDto);
         recetteDao.save(recetteFounded);
         return Optional.of(recetteTransformer.toDto(recetteFounded));
     }

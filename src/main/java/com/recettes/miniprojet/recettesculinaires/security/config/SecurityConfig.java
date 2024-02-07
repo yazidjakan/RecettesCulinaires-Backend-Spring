@@ -5,6 +5,7 @@ import com.recettes.miniprojet.recettesculinaires.services.impl.JWTAuthenticatio
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,9 +35,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @AllArgsConstructor
 public class SecurityConfig {
 
-    private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private UserDetailsService userDetailsService;
-    private JWTAuthenticationFilter authenticationFilter;
+    @Autowired private JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired private UserDetailsService userDetailsService;
+    @Autowired private JWTAuthenticationFilter authenticationFilter;
 
 
     @Bean // automatically authenticate using userDetailsService and passwordEncoder without specify just injected
@@ -61,11 +62,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST,"/api/v1/auth/register").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/v1/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/recettes/").permitAll()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 ).exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 ).sessionManagement(session -> session

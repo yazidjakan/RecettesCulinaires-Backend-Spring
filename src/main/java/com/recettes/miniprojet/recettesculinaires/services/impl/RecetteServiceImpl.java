@@ -6,6 +6,7 @@ import com.recettes.miniprojet.recettesculinaires.repositories.RecetteDao;
 import com.recettes.miniprojet.recettesculinaires.services.facade.AbstractService;
 import com.recettes.miniprojet.recettesculinaires.services.facade.RecetteService;
 import com.recettes.miniprojet.recettesculinaires.transformers.RecetteTransformer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class RecetteServiceImpl implements RecetteService {
     @Autowired
     private RecetteDao recetteDao;
@@ -41,6 +43,7 @@ public class RecetteServiceImpl implements RecetteService {
     @Override
     public Optional<RecetteDto> save(RecetteDto D) {
         Recette entity=recetteTransformer.toEntity(D);
+        log.info("La recette est ajouté :"+entity.getTitre());
         return Optional.of(recetteTransformer.toDto(recetteDao.save(entity)));
     }
 

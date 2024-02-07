@@ -38,11 +38,7 @@ public class RecetteController {
     public ResponseEntity<Optional<RecetteDto>> save(@RequestBody RecetteDto recetteDto){
         return new ResponseEntity<>(recetteService.save(recetteDto), HttpStatus.CREATED);
     }
-    @PutMapping("/")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Optional<RecetteDto>> update(@RequestBody RecetteDto recetteDto){
-        return ResponseEntity.ok(recetteService.update(recetteDto));
-    }
+
     @PutMapping("/id/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<Optional<RecetteDto>> updateById(@PathVariable String id, @RequestBody RecetteDto recetteDto){
